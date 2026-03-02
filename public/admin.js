@@ -27,19 +27,70 @@ function drawYearSelect() {
   });
 }
 
+function removePerson(personId) {
+  adminState.people = adminState.people.filter((person) => person.id !== personId);
+
+  AVAILABLE_YEARS.forEach((year) => {
+    if (adminState.paymentsByYear?.[year]?.[personId]) {
+      delete adminState.paymentsByYear[year][personId];
+    }
+  });
+
+  saveState(adminState);
+  drawTags();
+  drawTable();
+}
+
+function removeApp(appId) {
+  adminState.apps = adminState.apps.filter((app) => app.id !== appId);
+
+  AVAILABLE_YEARS.forEach((year) => {
+    const yearPayments = adminState.paymentsByYear?.[year];
+    if (!yearPayments) return;
+
+    Object.keys(yearPayments).forEach((personId) => {
+      if (yearPayments[personId]?.[appId]) {
+        delete yearPayments[personId][appId];
+      }
+    });
+  });
+
+  saveState(adminState);
+  drawTags();
+  drawTable();
+}
+
 function drawTags() {
   adminRefs.peopleTags.innerHTML = '';
   adminRefs.appsTags.innerHTML = '';
 
   adminState.people.forEach((person) => {
     const li = document.createElement('li');
-    li.textContent = person.name;
+    li.innerHTML = `<span>${person.name}</span>`;
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'tag-remove';
+    removeButton.textContent = '✕';
+    removeButton.title = `Eliminar persona ${person.name}`;
+    removeButton.addEventListener('click', () => removePerson(person.id));
+
+    li.appendChild(removeButton);
     adminRefs.peopleTags.appendChild(li);
   });
 
   adminState.apps.forEach((app) => {
     const li = document.createElement('li');
-    li.textContent = `${app.name} · ${currency(app.amount)}`;
+    li.innerHTML = `<span>${app.name} · ${currency(app.amount)}</span>`;
+
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.className = 'tag-remove';
+    removeButton.textContent = '✕';
+    removeButton.title = `Eliminar aplicación ${app.name}`;
+    removeButton.addEventListener('click', () => removeApp(app.id));
+
+    li.appendChild(removeButton);
     adminRefs.appsTags.appendChild(li);
   });
 }
