@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personas | Control de Pagos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero">
+        <div>
+          <h1>Vista de Personas</h1>
+          <p class="muted">Endpoint: <code>/persona</code> · Una fila por persona y 12 meses por app/año.</p>
+        </div>
+        <a class="nav-link" href="./admin.html">Ir a vista admin</a>
+      </section>
+
+      <section class="card">
+        <h2>Filtros</h2>
+        <div class="stack">
+          <label class="muted" for="yearSelect">Año</label>
+          <select id="yearSelect"></select>
+        </div>
+        <p class="muted" style="margin-top:0.8rem;">El color de la página cambia según la app seleccionada.</p>
+        <div id="appButtons" class="app-buttons"></div>
+        <div class="theme-legend">
+          <span class="legend-pill youtube">YouTube</span>
+          <span class="legend-pill netflix">Netflix</span>
+          <span class="legend-pill crunchyroll">Crunchyroll</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Pagos de todas las personas</h2>
+        <div id="peopleGrid" class="people-grid"></div>
+      </section>
+    </main>
+
+    <script src="./storage.js"></script>
+    <script src="./persona.js"></script>
+  </body>
+</html>

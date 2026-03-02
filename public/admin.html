@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Control de Pagos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app" id="adminAppRoot">
+      <section class="card" id="loginCard">
+        <h2>Login Administrador</h2>
+        <p class="muted">Ingresa con tu usuario y contraseña para gestionar pagos.</p>
+        <form id="loginForm" class="stack" style="margin-top:0.8rem; max-width:420px;">
+          <input id="loginUser" type="text" placeholder="Usuario" required />
+          <input id="loginPassword" type="password" placeholder="Contraseña" required />
+          <button type="submit">Iniciar sesión</button>
+        </form>
+        <p id="loginError" class="login-error" hidden>Credenciales inválidas.</p>
+      </section>
+
+      <section id="adminPanel" hidden>
+        <section class="hero">
+          <div>
+            <h1>Vista Administrador</h1>
+            <p class="muted">Gestiona personas, aplicaciones y pagos de los 12 meses.</p>
+          </div>
+          <div class="app-buttons" style="margin:0;">
+            <a class="nav-link" href="./persona.html">Ir a vista persona</a>
+            <button id="logoutButton" type="button" class="secondary">Cerrar sesión</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Año de trabajo</h2>
+          <div class="stack">
+            <select id="yearSelect"></select>
+          </div>
+        </section>
+
+        <section class="card quick-nav">
+          <h2>Navegación</h2>
+          <p class="muted">Si estás en admin y quieres ir a personas, usa este botón:</p>
+          <div class="app-buttons">
+            <a class="nav-link" href="./persona.html">Abrir vista persona</a>
+          </div>
+        </section>
+
+        <section class="grid">
+          <article class="card">
+            <h2>Registrar persona</h2>
+            <form id="personForm" class="stack">
+              <input id="personName" type="text" placeholder="Nombre completo" required />
+              <button type="submit">Agregar persona</button>
+            </form>
+            <ul id="peopleTags" class="tags"></ul>
+          </article>
+
+          <article class="card">
+            <h2>Registrar aplicación</h2>
+            <form id="appForm" class="stack">
+              <input id="appName" type="text" placeholder="Ej: Netflix" required />
+              <input id="appAmount" type="number" min="0" step="0.01" placeholder="Monto mensual (USD)" required />
+              <button type="submit">Agregar aplicación</button>
+            </form>
+            <ul id="appsTags" class="tags"></ul>
+          </article>
+        </section>
+
+        <section class="card">
+          <h2>Registro mensual</h2>
+          <p class="muted">Marca si una persona pagó una app en cada mes del año seleccionado.</p>
+          <div class="table-wrap" style="margin-top:0.8rem;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Persona</th><th>App</th><th>Monto</th>
+                  <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th>
+                  <th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
+                </tr>
+              </thead>
+              <tbody id="adminTableBody">
+                <tr><td colspan="15" class="muted">Sin datos cargados todavía.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./storage.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>

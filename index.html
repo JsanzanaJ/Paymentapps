@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Pagos | Inicio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --card: #fff;
+        --text: #111827;
+        --muted: #6b7280;
+        --primary: #2563eb;
+        --border: #e5e7eb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, sans-serif;
+        background: radial-gradient(circle at top right, #eaf2ff, var(--bg) 35%);
+        color: var(--text);
+      }
+      .wrap {
+        width: min(860px, 94vw);
+        margin: 6rem auto;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 1.3rem;
+      }
+      h1 { margin: 0; font-size: clamp(1.4rem, 2.6vw, 2rem); }
+      p { color: var(--muted); }
+      .actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+      a {
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 0.9rem;
+        color: var(--text);
+        font-weight: 600;
+        background: #fff;
+      }
+      a.primary {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+      }
+      code { background: #f3f4f6; padding: 0.12rem 0.35rem; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Control de Pagos Mensuales</h1>
+      <p>
+        En GitHub Pages se abre primero <code>/index.html</code>. Desde aquí puedes entrar a las dos vistas:
+        administrador y persona.
+      </p>
+      <div class="actions">
+        <a class="primary" href="./public/admin.html">Entrar a vista Administrador</a>
+        <a href="./public/persona.html">Entrar a vista Persona</a>
+      </div>
+    </main>
+  </body>
+</html>
