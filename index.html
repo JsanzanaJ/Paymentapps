@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Pagos Mensuales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Administrador</p>
+          <h1>Panel de pagos por mes</h1>
+          <p class="subtitle">
+            Registra personas, apps y marca cada pago mensual en una vista limpia de 12 meses.
+          </p>
+        </div>
+        <div class="year-pill">
+          <span>Año</span>
+          <strong id="yearLabel"></strong>
+        </div>
+      </header>
+
+      <section class="cards-grid">
+        <article class="card">
+          <h2>Agregar persona</h2>
+          <form id="personForm" class="stack">
+            <input id="personName" type="text" placeholder="Ej: María López" required />
+            <button type="submit">Guardar persona</button>
+          </form>
+          <ul id="peopleList" class="chips"></ul>
+        </article>
+
+        <article class="card">
+          <h2>Agregar pago de app</h2>
+          <form id="subscriptionForm" class="stack">
+            <input id="appName" type="text" placeholder="Nombre de app" required />
+            <input id="monthlyAmount" type="number" min="0" step="0.01" placeholder="Pago mensual (USD)" required />
+            <select id="personSelect" required>
+              <option value="">Selecciona una persona</option>
+            </select>
+            <button type="submit">Guardar pago</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-header">
+          <h2>Seguimiento mensual</h2>
+          <p>Marca cada casilla cuando el pago de ese mes esté realizado.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Persona</th>
+                <th>App</th>
+                <th>Monto</th>
+                <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th><th>May</th><th>Jun</th>
+                <th>Jul</th><th>Ago</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTableBody">
+              <tr class="empty-row"><td colspan="15">Todavía no hay pagos registrados.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="cards-grid summaries">
+        <article class="card">
+          <h3>Total pagado</h3>
+          <p id="paidTotal" class="metric">$0.00</p>
+        </article>
+        <article class="card">
+          <h3>Total pendiente</h3>
+          <p id="pendingTotal" class="metric">$0.00</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+  --primary-soft: #dbeafe;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #eaf2ff, var(--bg) 35%);
+}
+
+.app {
+  width: min(1220px, 94vw);
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero,
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.muted { color: var(--muted); }
+
+.nav-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+  background: var(--primary-soft);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card { padding: 1rem; }
+
+.stack { display: grid; gap: 0.65rem; margin-top: 0.8rem; }
+
+input, select, button {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.68rem 0.8rem;
+  font: inherit;
+}
+
+button {
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #f3f4f6;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.tags {
+  margin-top: 0.8rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags li {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: #f9fafb;
+}
+
+.table-wrap { overflow-x: auto; }
+
+.table { width: 100%; min-width: 980px; border-collapse: collapse; }
+
+th, td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.56rem;
+  text-align: center;
+  font-size: 0.86rem;
+}
+
+th { color: var(--muted); font-weight: 600; background: #fbfdff; }
+th:first-child, th:nth-child(2), td:first-child, td:nth-child(2) { text-align: left; }
+
+.month-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success);
+}
+
+.app-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.8rem 0 1rem;
+}
+
+.app-buttons button {
+  width: auto;
+  padding: 0.5rem 0.8rem;
+  background: #eef2ff;
+  color: #1e40af;
+}
+
+.app-buttons button.active {
+  background: var(--primary);
+  color: white;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.6rem;
+}
+
+.month-pill {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.65rem;
+  background: #fff;
+}
+
+.month-pill strong { display: block; margin-bottom: 0.3rem; }
+.status-ok { color: var(--success); font-weight: 600; }
+.status-no { color: var(--danger); font-weight: 600; }
+
+@media (max-width: 680px) {
+  .hero { flex-direction: column; align-items: flex-start; }
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 0.8rem;
+}
+
+.person-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.75rem;
+  background: #fdfdff;
+}
+
+.person-card h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+}
+
+:root {
+  --app-accent: #1d4ed8;
+}
+
+.app-buttons button {
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, white);
+}
+
+.people-table {
+  min-width: 1200px;
+}
+
+.people-table th {
+  background: color-mix(in srgb, var(--primary-soft) 45%, white);
+}
+
+.person-name-cell {
+  font-weight: 600;
+  color: var(--app-accent);
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-chip.paid {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.status-chip.pending {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.theme-legend {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.legend-pill {
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+
+.legend-pill.youtube {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.legend-pill.netflix {
+  background: #111827;
+  color: #fecaca;
+}
+
+.legend-pill.crunchyroll {
+  background: #ffedd5;
+  color: #c2410c;
+}
