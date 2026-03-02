@@ -8,8 +8,10 @@ const viewerRefs = {
 
 const APP_THEMES = {
   youtube: { primary: '#dc2626', soft: '#fee2e2', accent: '#991b1b' },
+  yotube: { primary: '#dc2626', soft: '#fee2e2', accent: '#991b1b' },
   netflix: { primary: '#111111', soft: '#fecaca', accent: '#b91c1c' },
-  crunchyroll: { primary: '#f97316', soft: '#ffedd5', accent: '#c2410c' }
+  crunchyroll: { primary: '#f97316', soft: '#ffedd5', accent: '#c2410c' },
+  'crunchy roll': { primary: '#f97316', soft: '#ffedd5', accent: '#c2410c' }
 };
 
 let selectedAppId = '';

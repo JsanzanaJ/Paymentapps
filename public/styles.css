@@ -225,3 +225,33 @@ th:first-child, th:nth-child(2), td:first-child, td:nth-child(2) { text-align: l
   color: #991b1b;
   background: #fee2e2;
 }
+
+.theme-legend {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.legend-pill {
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+
+.legend-pill.youtube {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.legend-pill.netflix {
+  background: #111827;
+  color: #fecaca;
+}
+
+.legend-pill.crunchyroll {
+  background: #ffedd5;
+  color: #c2410c;
+}
