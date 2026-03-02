@@ -274,3 +274,9 @@ th:first-child, th:nth-child(2), td:first-child, td:nth-child(2) { text-align: l
   background: #ffedd5;
   color: #c2410c;
 }
+
+.login-error {
+  margin-top: 0.7rem;
+  color: #b91c1c;
+  font-weight: 600;
+}

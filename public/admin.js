@@ -1,6 +1,17 @@
 let adminState = loadState();
 
+const AUTH_USER = 'Jorge';
+const AUTH_PASSWORD = 'admin1234';
+const AUTH_SESSION_KEY = 'payment-admin-auth-v1';
+
 const adminRefs = {
+  loginCard: document.getElementById('loginCard'),
+  loginForm: document.getElementById('loginForm'),
+  loginUser: document.getElementById('loginUser'),
+  loginPassword: document.getElementById('loginPassword'),
+  loginError: document.getElementById('loginError'),
+  adminPanel: document.getElementById('adminPanel'),
+  logoutButton: document.getElementById('logoutButton'),
   yearSelect: document.getElementById('yearSelect'),
   personForm: document.getElementById('personForm'),
   personName: document.getElementById('personName'),
@@ -11,6 +22,20 @@ const adminRefs = {
   appsTags: document.getElementById('appsTags'),
   adminTableBody: document.getElementById('adminTableBody')
 };
+
+function isLoggedIn() {
+  return sessionStorage.getItem(AUTH_SESSION_KEY) === 'ok';
+}
+
+function showLogin() {
+  adminRefs.loginCard.hidden = false;
+  adminRefs.adminPanel.hidden = true;
+}
+
+function showPanel() {
+  adminRefs.loginCard.hidden = true;
+  adminRefs.adminPanel.hidden = false;
+}
 
 function currency(value) {
   return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(value);
@@ -132,46 +157,79 @@ function drawTable() {
   saveState(adminState);
 }
 
-adminRefs.yearSelect.addEventListener('change', () => {
-  adminState.year = Number(adminRefs.yearSelect.value);
-  saveState(adminState);
-  drawTable();
-});
+function bindAdminEvents() {
+  adminRefs.yearSelect.addEventListener('change', () => {
+    adminState.year = Number(adminRefs.yearSelect.value);
+    saveState(adminState);
+    drawTable();
+  });
 
-adminRefs.personForm.addEventListener('submit', (event) => {
+  adminRefs.personForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = sanitizeText(adminRefs.personName.value);
+    if (!name) return;
+
+    adminState.people.push({ id: crypto.randomUUID(), name });
+    saveState(adminState);
+    adminRefs.personForm.reset();
+    drawTags();
+    drawTable();
+  });
+
+  adminRefs.appForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = sanitizeText(adminRefs.appName.value);
+    const amount = Number(adminRefs.appAmount.value);
+
+    if (!name || Number.isNaN(amount) || amount < 0) return;
+
+    adminState.apps.push({ id: crypto.randomUUID(), name, amount: sanitizeNumber(amount) });
+    saveState(adminState);
+    adminRefs.appForm.reset();
+    drawTags();
+    drawTable();
+  });
+
+  adminRefs.logoutButton.addEventListener('click', () => {
+    sessionStorage.removeItem(AUTH_SESSION_KEY);
+    showLogin();
+  });
+}
+
+adminRefs.loginForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const name = sanitizeText(adminRefs.personName.value);
-  if (!name) return;
+  const user = adminRefs.loginUser.value.trim();
+  const password = adminRefs.loginPassword.value;
 
-  adminState.people.push({ id: crypto.randomUUID(), name });
-  saveState(adminState);
-  adminRefs.personForm.reset();
-  drawTags();
-  drawTable();
-});
+  if (user === AUTH_USER && password === AUTH_PASSWORD) {
+    sessionStorage.setItem(AUTH_SESSION_KEY, 'ok');
+    adminRefs.loginError.hidden = true;
+    adminRefs.loginForm.reset();
+    showPanel();
+    drawYearSelect();
+    drawTags();
+    drawTable();
+    return;
+  }
 
-adminRefs.appForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const name = sanitizeText(adminRefs.appName.value);
-  const amount = Number(adminRefs.appAmount.value);
-
-  if (!name || Number.isNaN(amount) || amount < 0) return;
-
-  adminState.apps.push({ id: crypto.randomUUID(), name, amount: sanitizeNumber(amount) });
-  saveState(adminState);
-  adminRefs.appForm.reset();
-  drawTags();
-  drawTable();
+  adminRefs.loginError.hidden = false;
 });
 
 window.addEventListener('storage', (event) => {
-  if (event.key !== STORAGE_KEY) return;
+  if (event.key !== STORAGE_KEY || !isLoggedIn()) return;
   adminState = loadState();
   drawYearSelect();
   drawTags();
   drawTable();
 });
 
-drawYearSelect();
-drawTags();
-drawTable();
+bindAdminEvents();
+
+if (isLoggedIn()) {
+  showPanel();
+  drawYearSelect();
+  drawTags();
+  drawTable();
+} else {
+  showLogin();
+}
