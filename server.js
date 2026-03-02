@@ -35,12 +35,12 @@ function sendFile(res, filePath) {
 const server = http.createServer((req, res) => {
   const cleanPath = req.url.split('?')[0];
 
-  if (cleanPath === '/' || cleanPath === '/admin') {
+  if (cleanPath === '/' || cleanPath === '/admin' || cleanPath === '/admin.html') {
     sendFile(res, path.join(PUBLIC_DIR, 'admin.html'));
     return;
   }
 
-  if (cleanPath === '/persona') {
+  if (cleanPath === '/persona' || cleanPath === '/persona.html') {
     sendFile(res, path.join(PUBLIC_DIR, 'persona.html'));
     return;
   }

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="app">
@@ -16,13 +16,22 @@
           <h1>Vista Administrador</h1>
           <p class="muted">Gestiona personas, aplicaciones y pagos de los 12 meses.</p>
         </div>
-        <a class="nav-link" href="/persona">Ir a vista persona</a>
+        <a class="nav-link" href="./persona.html">Ir a vista persona</a>
       </section>
 
       <section class="card">
         <h2>Año de trabajo</h2>
         <div class="stack">
           <select id="yearSelect"></select>
+        </div>
+      </section>
+
+
+      <section class="card quick-nav">
+        <h2>Navegación</h2>
+        <p class="muted">Si estás en admin y quieres ir a personas, usa este botón:</p>
+        <div class="app-buttons">
+          <a class="nav-link" href="./persona.html">Abrir vista persona</a>
         </div>
       </section>
 
@@ -67,7 +76,7 @@
       </section>
     </main>
 
-    <script src="/storage.js"></script>
-    <script src="/admin.js"></script>
+    <script src="./storage.js"></script>
+    <script src="./admin.js"></script>
   </body>
 </html>
