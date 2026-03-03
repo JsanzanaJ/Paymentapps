@@ -20,7 +20,11 @@ const adminRefs = {
   appAmount: document.getElementById('appAmount'),
   peopleTags: document.getElementById('peopleTags'),
   appsTags: document.getElementById('appsTags'),
-  adminTableBody: document.getElementById('adminTableBody')
+  adminTableBody: document.getElementById('adminTableBody'),
+  exportJsonButton: document.getElementById('exportJsonButton'),
+  importJsonButton: document.getElementById('importJsonButton'),
+  importJsonFile: document.getElementById('importJsonFile'),
+  importStatus: document.getElementById('importStatus')
 };
 
 function isLoggedIn() {
@@ -157,6 +161,44 @@ function drawTable() {
   saveState(adminState);
 }
 
+
+function exportJsonData() {
+  const data = JSON.stringify(loadState(), null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const today = new Date().toISOString().slice(0, 10);
+  link.href = url;
+  link.download = `pagos-backup-${today}.json`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  adminRefs.importStatus.textContent = 'Backup JSON exportado correctamente.';
+}
+
+function importJsonData(file) {
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(String(reader.result || '{}'));
+      saveState(parsed);
+      adminState = loadState();
+      drawYearSelect();
+      drawTags();
+      drawTable();
+      adminRefs.importStatus.textContent = 'Datos importados correctamente.';
+      adminRefs.importStatus.classList.remove('login-error');
+    } catch {
+      adminRefs.importStatus.textContent = 'El archivo JSON no es válido.';
+      adminRefs.importStatus.classList.add('login-error');
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+}
+
 function bindAdminEvents() {
   adminRefs.yearSelect.addEventListener('change', () => {
     adminState.year = Number(adminRefs.yearSelect.value);
@@ -188,6 +230,18 @@ function bindAdminEvents() {
     adminRefs.appForm.reset();
     drawTags();
     drawTable();
+  });
+
+
+  adminRefs.exportJsonButton.addEventListener('click', exportJsonData);
+
+  adminRefs.importJsonButton.addEventListener('click', () => {
+    adminRefs.importJsonFile.click();
+  });
+
+  adminRefs.importJsonFile.addEventListener('change', () => {
+    importJsonData(adminRefs.importJsonFile.files?.[0]);
+    adminRefs.importJsonFile.value = '';
   });
 
   adminRefs.logoutButton.addEventListener('click', () => {
